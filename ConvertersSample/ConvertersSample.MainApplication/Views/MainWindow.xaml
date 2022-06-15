@@ -1,0 +1,48 @@
+﻿<Window x:Class="ConvertersSample.MainApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:ConvertersSample.MainApplication.Converters"  
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="400">
+    <Window.Resources>        
+        <converters:SafetyToColorConverter x:Key="safetyConverter"></converters:SafetyToColorConverter>
+        <converters:BooleanToVisibilityConverter x:Key="boolVisConverter"></converters:BooleanToVisibilityConverter>
+        <converters:EnumToFontSizeConverter x:Key="EnumSizeConverter"></converters:EnumToFontSizeConverter>
+    </Window.Resources>
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>           
+            <RowDefinition Height="Auto"></RowDefinition>           
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="Visibility Converter" Height="100">
+            <StackPanel Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="Show the Text" GroupName="VisibilityRadio" IsChecked="{Binding IsVisibleChecked}" ></RadioButton>
+                    <RadioButton Content="Hide the Text" GroupName="VisibilityRadio" Margin="20 0 0 0" ></RadioButton>
+                </StackPanel>
+                <TextBlock Text="I'm Visible" Margin="10" FontSize="18" Visibility="{Binding IsVisibleChecked, Converter={StaticResource boolVisConverter},Mode=TwoWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            </StackPanel>            
+        </GroupBox>
+
+        <GroupBox  Grid.Row="1" Header="Color Converter"  Height="100">
+            <StackPanel Background="{Binding Path=SelectedSafety, Converter={StaticResource safetyConverter},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" Margin="10">
+                <ComboBox  ItemsSource="{Binding SafetyList}" SelectedItem="{Binding SelectedSafety}" Margin="10" >
+                </ComboBox>
+            </StackPanel>
+        </GroupBox>
+
+
+        <GroupBox Grid.Row="2" Header="Text Size Converter" Height="150">
+            <StackPanel Margin="10">
+                <ComboBox ItemsSource="{Binding TextSizeList}" SelectedItem="{Binding SelectedSize}">
+                    
+                </ComboBox>
+                <TextBlock Text="{Binding Path=TextContent,Mode=TwoWay}" FontSize="{Binding Path=SelectedSize,Converter={StaticResource EnumSizeConverter},Mode=TwoWay}" Margin="10"></TextBlock>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</Window>

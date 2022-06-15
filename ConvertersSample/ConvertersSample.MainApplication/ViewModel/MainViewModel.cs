@@ -14,7 +14,8 @@ namespace ConvertersSample.MainApplication.ViewModel
         #region Constructor
         public MainViewModel()
         {
-           
+           SelectedSize = TextSize.Small;
+           SelectedSafety = Safety.Safe;
         }
         #endregion
 

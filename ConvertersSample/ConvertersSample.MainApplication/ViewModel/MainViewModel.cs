@@ -113,7 +113,8 @@ namespace ConvertersSample.MainApplication.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        #endregion
     }
-    #endregion
+
 }
 

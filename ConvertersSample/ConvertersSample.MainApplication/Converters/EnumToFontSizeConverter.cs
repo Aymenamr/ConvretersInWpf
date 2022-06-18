@@ -30,7 +30,15 @@ namespace ConvertersSample.MainApplication.Converters
                 throw new Exception(ex.Message);
             }
         }
-
+        /// <summary>
+        /// No need to convert back in this sample
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
